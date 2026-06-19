@@ -1,0 +1,7 @@
+---
+title: "Compare Human, LLM, and Mixed Experiments"
+output: html_document
+---
+
+TODO: Add R analysis notebook.
+

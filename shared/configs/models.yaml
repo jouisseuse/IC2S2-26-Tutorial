@@ -1,0 +1,6 @@
+# TODO: Document model provider fields.
+models:
+  default:
+    provider: mock
+    name: mock
+

@@ -1,0 +1,9 @@
+# TODO: Document treatment configuration fields.
+treatments:
+  control:
+    show_group_average: false
+    allow_chat: false
+  social_information:
+    show_group_average: true
+    allow_chat: false
+

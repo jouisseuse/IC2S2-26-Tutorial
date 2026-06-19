@@ -1,0 +1,6 @@
+# TODO: Add exercise-specific agent configuration.
+agents:
+  human: 0
+  llm: 4
+  scripted: 0
+

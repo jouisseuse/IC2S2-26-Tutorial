@@ -1,0 +1,7 @@
+# TODO: Document agent configuration fields.
+agents:
+  human: 2
+  llm: 2
+  scripted: 0
+  random: 0
+

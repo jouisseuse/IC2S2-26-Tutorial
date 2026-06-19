@@ -1,0 +1,15 @@
+game:
+  type: public_goods
+  group_size: 4
+  num_rounds: 5
+  endowment: 10
+  multiplier: 1.5
+agents:
+  human: 2
+  llm: 2
+  scripted: 0
+treatment:
+  name: social_information
+  show_group_average: true
+  allow_chat: false
+

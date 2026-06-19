@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Game",
+  "type": "object",
+  "description": "TODO: Define shared game schema."
+}
+

@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EventLog",
+  "type": "object",
+  "description": "TODO: Define shared event log schema with game_id, group_id, round, stage, actor_id, actor_type, action, observation, payoff, treatment, and timestamp."
+}
+

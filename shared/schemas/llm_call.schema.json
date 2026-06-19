@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LLMCall",
+  "type": "object",
+  "description": "TODO: Define LLM call schema with model, prompt_id, system_prompt, user_prompt, raw_response, parsed_action, latency_ms, temperature, and max_tokens."
+}
+
