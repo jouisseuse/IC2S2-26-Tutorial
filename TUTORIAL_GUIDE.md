@@ -1,107 +1,156 @@
 # Tutorial Guide
 
-This guide organizes the three-hour tutorial around the framework:
+This guide maps the three-hour tutorial to the repository folders.
 
-Agents, Actions, Information, Interaction, Outcomes.
+The tutorial is organized around five design questions:
 
-## Part 1: Why Multiplayer Experiments?
+1. Who are the agents?
+2. What actions can they take?
+3. What information do they receive?
+4. How do they interact?
+5. What outcomes emerge?
+
+## Before the Tutorial
+
+Checklist:
+
+- Clone the repository.
+- Install dependencies for the minimal example once available.
+- Copy `.env.example` to `.env`.
+- Run the minimal human-only example.
+- Open two participant windows.
+- Run the mock LLM simulation.
+- Read [SETUP_BACKUP.md](SETUP_BACKUP.md) if setup fails.
+
+Folders to inspect:
+
+- `README.md`
+- `SETUP.md`
+- `REPO_MAP.md`
+- `hands_on/exercise_00_check_setup/`
+
+## During the Tutorial
+
+### Part 1: Why Multiplayer Experiments?
 
 Time: 20 minutes
 
-Materials:
+Open:
 
 - `slides/`
 - `docs/01_what_is_multiplayer_experiment.md`
 - `docs/02_design_framework.md`
 
-Goal: Explain why many social psychological phenomena require interacting participants.
+Goal: Explain why social behavior often requires interacting participants, not isolated responses.
 
-## Part 2: Empirica for Human Experiments
+### Part 2: Empirica for Human Experiments
 
 Time: 25 minutes
 
-Materials:
+Open:
 
 - `engines/empirica/`
 - `examples/human_only/00_minimal_two_player_choice/`
 
 Goal: Introduce Empirica as the human experiment engine.
 
-## Part 3: Hands-on Minimal Experiment
+### Exercise 1: Run Minimal Experiment
 
 Time: 25 minutes
 
-Materials:
+Open:
 
 - `hands_on/exercise_01_run_minimal_experiment/`
+- `engines/empirica/human_only/minimal_two_player_choice/`
 
-Goal: Participants run a two-player experiment locally.
+Goal: Run a two-player, one-round experiment.
 
-## Part 4: Modify Public Goods Game
+### Exercise 2: Modify Public Goods Game
 
 Time: 30 minutes
 
-Materials:
+Open:
 
 - `hands_on/exercise_02_modify_public_goods_game/`
 - `examples/human_only/01_public_goods/`
+- `shared/game_logic/public_goods/`
 
-Goal: Participants modify group size, rounds, endowment, and multiplier.
+Goal: Modify group size, rounds, endowment, multiplier, and feedback.
 
-## Part 5: Add Social Information
+### Exercise 3: Add Social Information
 
 Time: 25 minutes
 
-Materials:
+Open:
 
 - `hands_on/exercise_03_add_social_information/`
-- `shared/game_logic/`
+- `shared/configs/`
+- `components/widgets/SocialInformationBox.jsx`
 
-Goal: Participants understand information structure as the core experimental manipulation.
+Goal: Understand information structure as an experimental manipulation.
 
-## Part 6: LLM-Only Simulation
+### Exercise 4: Run LLM Only Simulation
 
 Time: 25 minutes
 
-Materials:
+Open:
 
 - `hands_on/exercise_04_run_llm_only_simulation/`
 - `engines/llm_simulation/`
-- `shared/prompts/`
+- `shared/prompts/public_goods/`
 
-Goal: Participants run a simulation with multiple LLM agents.
+Goal: Run the same game logic without human participants using mock LLM agents.
 
-## Part 7: Mixed Human-LLM Experiment
+### Exercise 5: Run Mixed Human and LLM Experiment
 
 Time: 25 minutes
 
-Materials:
+Open:
 
 - `hands_on/exercise_05_run_mixed_human_llm_experiment/`
 - `engines/mixed_human_llm/`
-- `examples/mixed_human_llm/`
+- `examples/mixed_human_llm/06_mixed_public_goods/`
 
-Goal: Participants see how human participants and LLM agents can be combined.
+Goal: Combine human participants and LLM agents in the same game.
 
-## Part 8: Data Analysis
+### Exercise 6: Export and Analyze Data
 
 Time: 20 minutes
 
-Materials:
+Open:
 
-- `analysis/`
 - `hands_on/exercise_06_export_and_analyze_data/`
+- `analysis/`
+- `shared/schemas/`
 
-Goal: Show how to reconstruct and analyze multiplayer data.
+Goal: Reconstruct player round, group round, and game level outcomes.
 
-## Part 9: Design Your Own Experiment
+### Exercise 7: Design Your Own Experiment
 
 Time: 5 minutes
 
-Materials:
+Open:
 
 - `hands_on/exercise_07_design_your_own_experiment/`
-- `assets/templates/design_worksheet.pdf`
+- `assets/templates/design_worksheet.pdf.placeholder`
 
-Goal: Participants leave with a concrete plan for their own experiment.
+Goal: Leave with one concrete experiment design.
 
+## After the Tutorial
+
+Checklist:
+
+- Choose the closest example.
+- Modify config files.
+- Modify game logic only when the rules change.
+- Modify prompts only when LLM agent instructions change.
+- Run a small pilot.
+- Export data.
+- Analyze player round and group round outcomes separately.
+
+Recommended next folders:
+
+- `examples/`
+- `shared/game_logic/`
+- `shared/prompts/`
+- `analysis/`

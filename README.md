@@ -1,69 +1,115 @@
 # Multiplayer Experiment Framework
 
-A reusable tutorial and research framework for designing, running, and analyzing multiplayer behavioral experiments, including human-only experiments, LLM-only simulations, and mixed human-AI experiments.
+A reusable tutorial and research framework for designing, running, and analyzing multiplayer behavioral experiments, including human only experiments, LLM only simulations, and mixed human AI experiments.
 
-This repository is not only an Empirica tutorial. Empirica is one experiment engine for running real-time human participant experiments. The broader goal is to provide a general framework for multiplayer behavioral experiments.
+This repository is not only an Empirica tutorial. Empirica is the human experiment engine. The broader goal is to teach a general framework for designing multiplayer behavioral experiments.
 
-## Who This Is For
+## Who This Repo Is For
 
-- Researchers designing multiplayer behavioral experiments
-- Psychologists learning real-time interaction experiments
+- Psychologists and behavioral scientists learning multiplayer experiment design
+- Computational social scientists comparing humans, LLM agents, and mixed groups
 - Tutorial participants who want guided modification rather than coding from scratch
-- Researchers comparing human-only, LLM-only, and mixed human-LLM settings
+- Collaborators building reusable examples for future workshops and papers
 
-## Supported Modes
+## What Users Will Learn
 
-1. Human-only multiplayer experiments
-2. LLM-only multiplayer simulations
-3. Mixed human-LLM multiplayer experiments
+- How to describe a multiplayer experiment in terms of agents, actions, information, interaction, and outcomes
+- How to run human only experiments with Empirica
+- How to run LLM only simulations with mock agents by default
+- How to combine human participants and LLM agents in mixed experiments
+- How to reconstruct player round, group round, and game level data
 
-## Core Design Principle
+## Three Experiment Modes
 
-Separate the parts that researchers often need to modify:
+1. Human only experiments: real participants interact through Empirica.
+2. LLM only simulations: LLM or mock agents interact without a browser.
+3. Mixed human and LLM experiments: human participants and LLM agents act in the same game.
 
-- Game logic
-- Engine
-- Agent type
-- Model
-- Prompt
-- Data analysis
+## Core Architecture
 
-Every experiment should answer:
+```text
+Game logic
+    |
+    v
+Engine
+    |
+    v
+Agents
+    |
+    v
+Actions
+    |
+    v
+Data
+    |
+    v
+Analysis
+```
 
-1. Who are the agents?
-2. What can they do?
-3. What information do they receive?
-4. How do they affect each other?
-5. What individual and group outcomes emerge?
-6. How should the resulting data be analyzed?
+- Game logic defines the rules.
+- Engine defines where the experiment runs.
+- Agents define who acts: human, LLM, scripted, or random.
+- Models define how LLM agents respond.
+- Prompts define how LLM agents receive information.
+- Analysis reconstructs individual and group level outcomes.
+
+The key design principle is to keep these parts separate. Users should be able to change game rules, agent composition, treatment conditions, prompts, model providers, and analysis scripts without rewriting the full project.
 
 ## Quick Start
 
-TODO: Add quick start command after the first runnable example is implemented.
+The first runnable examples are still being built. For now:
 
-For now, start with:
+```bash
+git clone https://github.com/jouisseuse/multiplayer-experiment-framework.git
+cd multiplayer-experiment-framework
+cp .env.example .env
+```
+
+Then read:
 
 - [SETUP.md](SETUP.md)
 - [TUTORIAL_GUIDE.md](TUTORIAL_GUIDE.md)
 - [REPO_MAP.md](REPO_MAP.md)
+- [CONTENT_REQUIREMENTS.md](CONTENT_REQUIREMENTS.md)
 
-## Minimum Viable Tutorial Path
+## Tutorial Path
 
-1. Run a minimal two-player experiment
-2. Modify a public goods game
-3. Run an LLM-only public goods simulation
-4. Export and analyze multiplayer data
+1. Run a minimal two-player human experiment.
+2. Modify a public goods game.
+3. Add social information as a treatment.
+4. Run an LLM only simulation with a mock model.
+5. Run a mixed human and LLM experiment.
+6. Export and analyze multiplayer data.
+7. Design your own experiment.
+
+## Repository Structure
+
+- `slides/`: Teaching slides, scripts, figures, and speaker notes
+- `hands_on/`: Guided tutorial exercises
+- `engines/`: Empirica, LLM simulation, and mixed human-LLM runners
+- `shared/`: Game logic, schemas, configs, prompts, and logging
+- `components/`: Reusable Empirica UI components
+- `examples/`: Complete examples users can copy and modify
+- `analysis/`: Sample data, scripts, notebooks, and figures
+- `docs/`: Conceptual documentation
+- `assets/`: Screenshots, videos, diagrams, and worksheet templates
+- `external_links/`: Curated learning resources
+
+## Minimal Examples
+
+The minimum first version will focus on:
+
+- `engines/empirica/human_only/minimal_two_player_choice`
+- `examples/human_only/00_minimal_two_player_choice`
+- `hands_on/exercise_01_run_minimal_experiment`
+- `engines/llm_simulation`
+- `examples/llm_only/04_public_goods_llm_simulation`
+- `analysis/notebooks/python/01_analyze_public_goods.ipynb`
 
 ## Citation
 
-TODO: Update [CITATION.cff](CITATION.cff) before release.
+Citation metadata will be maintained in [CITATION.cff](CITATION.cff).
 
-## Repository TODO
+## License
 
-- [ ] Add conceptual diagram
-- [ ] Add quick start command
-- [ ] Link to tutorial guide sections
-- [ ] Link to runnable examples
-- [ ] Link to analysis scripts
-- [ ] Add release citation
-
+The license is not finalized yet. See [LICENSE](LICENSE).
