@@ -1,16 +1,24 @@
 # Analysis
 
-Scripts and notebooks for analyzing multiplayer data.
+This folder contains scripts, notebooks, sample data, and figures for analyzing multiplayer experiment data.
 
-Important: multiplayer data are not independent individual observations. Participants in the same group influence each other. Analyze player-round, group-round, and game-level data separately.
+Important: multiplayer data are not independent individual observations. Participants in the same group influence each other. Analyze player-level, player-round, group-round, game-level, message-level, and LLM-call-level data separately when appropriate.
 
-TODO:
+## Who Should Use This
 
-- [ ] Provide sample exported data
-- [ ] Write Python analysis scripts
-- [ ] Write R analysis scripts
-- [ ] Create public goods notebook
-- [ ] Create social learning notebook
-- [ ] Create human vs LLM comparison notebook
-- [ ] Add example figures
+Use this folder if you are cleaning exports, reconstructing player-round or group-round data, merging LLM logs, computing outcomes, or creating plots.
 
+## What Should Be Added Later
+
+- Sample exported data for human-only, LLM-only, and mixed experiments
+- Python and R cleaning scripts
+- Notebooks for public goods, social learning, and human versus LLM comparisons
+- Example figures for tutorial and paper use
+
+## What Not To Put Here
+
+Do not put experiment runtime code, UI components, prompts, or game rules here. Runtime code belongs in `engines/`, UI belongs in `components/`, prompts belong in `shared/prompts/`, and game rules belong in `shared/game_logic/`.
+
+## Completion Standard
+
+A user should be able to load sample data, reconstruct group outcomes, merge LLM call logs, and create basic plots from exported data.
