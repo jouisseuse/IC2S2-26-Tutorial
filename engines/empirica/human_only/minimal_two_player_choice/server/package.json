@@ -1,0 +1,21 @@
+{
+  "name": "minimal-two-player-choice-server",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "build": "esbuild src/index.js --color=true --log-level=warning --platform=node --define:process.env.NODE_ENV='\"production\"' --bundle --outfile=dist/index.js --sourcemap",
+    "dev": "npm run build && node --trace-warnings --enable-source-maps --unhandled-rejections=warn-with-error-code dist/index.js",
+    "serve": "node --trace-warnings --enable-source-maps --unhandled-rejections=warn-with-error-code index.js"
+  },
+  "dependencies": {
+    "@empirica/core": "1.12.5",
+    "minimist": "1.2.6"
+  },
+  "devDependencies": {
+    "esbuild": "0.17.15"
+  },
+  "volta": {
+    "node": "20.12.0",
+    "npm": "10.2.4"
+  }
+}

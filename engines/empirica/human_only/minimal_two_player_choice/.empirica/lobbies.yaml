@@ -1,0 +1,6 @@
+lobbies:
+  - name: Two player shared lobby
+    kind: shared
+    duration: 5m
+    strategy: fail
+

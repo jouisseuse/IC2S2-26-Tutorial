@@ -1,0 +1,12 @@
+{
+  "name": "minimal-two-player-choice",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Minimal Empirica example with two players, one decision, and one feedback page.",
+  "scripts": {
+    "install:all": "npm --prefix client install && npm --prefix server install",
+    "dev": "empirica",
+    "dev:mem": "empirica --tajriba.store.mem",
+    "export": "empirica export --out sample_data/export.zip"
+  }
+}

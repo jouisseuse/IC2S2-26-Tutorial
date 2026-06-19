@@ -1,12 +1,12 @@
 # Setup
 
-This guide helps you prepare the repository for the tutorial. The first runnable examples are still being built, so some commands are placeholders until the minimal example is implemented.
+This guide helps you prepare the repository for the tutorial.
 
 ## System Requirements
 
 Recommended:
 
-- Node.js 20 or newer
+- Node.js 20.12.0 or newer
 - npm 10 or newer
 - Git
 - A modern browser such as Chrome, Edge, or Firefox
@@ -22,19 +22,11 @@ cd multiplayer-experiment-framework
 
 ## Install Dependencies
 
-After package files are added, install dependencies from the relevant example folder.
-
-General placeholder:
-
-```bash
-npm install
-```
-
-For an Empirica example, use the example folder:
+For the minimal Empirica example, use the example folder:
 
 ```bash
 cd engines/empirica/human_only/minimal_two_player_choice
-npm install
+npm run install:all
 ```
 
 ## Set Environment Variables
@@ -51,15 +43,15 @@ Do not commit `.env`.
 
 ## Run Human Only Empirica Example
 
-Placeholder command for the minimal human-only experiment:
+Run the minimal human-only experiment:
 
 ```bash
 cd engines/empirica/human_only/minimal_two_player_choice
-npm install
+npm run install:all
 npm run dev
 ```
 
-Expected result once implemented:
+Expected result:
 
 - Empirica starts locally.
 - The admin panel opens or prints a local URL.

@@ -1,0 +1,11 @@
+factors:
+  - name: playerCount
+    desc: Number of human participants in the game.
+    values:
+      - value: 2
+treatments:
+  - name: Two Players
+    desc: Minimal two-player choice experiment.
+    factors:
+      playerCount: 2
+

@@ -57,12 +57,15 @@ The key design principle is to keep these parts separate. Users should be able t
 
 ## Quick Start
 
-The first runnable examples are still being built. For now:
+The minimal human-only example is available:
 
 ```bash
 git clone https://github.com/jouisseuse/multiplayer-experiment-framework.git
 cd multiplayer-experiment-framework
 cp .env.example .env
+cd engines/empirica/human_only/minimal_two_player_choice
+npm run install:all
+npm run dev
 ```
 
 Then read:
@@ -97,11 +100,14 @@ Then read:
 
 ## Minimal Examples
 
-The minimum first version will focus on:
+The minimum first version starts with:
 
 - `engines/empirica/human_only/minimal_two_player_choice`
 - `examples/human_only/00_minimal_two_player_choice`
 - `hands_on/exercise_01_run_minimal_experiment`
+
+Next planned examples:
+
 - `engines/llm_simulation`
 - `examples/llm_only/04_public_goods_llm_simulation`
 - `analysis/notebooks/python/01_analyze_public_goods.ipynb`

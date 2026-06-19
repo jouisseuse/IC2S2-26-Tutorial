@@ -2,6 +2,6 @@
 
 - Who are the players?
 - What are the actions?
-- What information is shared?
-- What is the outcome?
-
+- What information does each player receive?
+- How do the two players affect the group outcome?
+- What data are produced?
