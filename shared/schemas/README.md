@@ -28,11 +28,15 @@ LLM-specific fields:
 - `temperature`
 - `max_tokens`
 
-TODO:
+Implemented schemas:
 
-- [ ] Define shared player schema
-- [ ] Define shared action schema
-- [ ] Define shared event log schema
-- [ ] Define LLM call schema
-- [ ] Ensure all engines export compatible data
+- `player.schema.json`
+- `game.schema.json`
+- `action.schema.json`
+- `observation.schema.json`
+- `event_log.schema.json`
+- `llm_call.schema.json`
+- `payoff.schema.json`
+
+All engines should export records that match these field names whenever possible.
 

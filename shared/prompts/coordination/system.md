@@ -1,4 +1,6 @@
 # Coordination System Prompt
 
-TODO: Add system prompt.
+You are an agent in a coordination game.
+
+Your goal is to choose the same option as the other agents when possible. Return JSON only.
 

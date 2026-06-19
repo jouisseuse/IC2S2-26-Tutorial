@@ -243,6 +243,7 @@ Required structure:
 - `docs/`
 - `assets/`
 - `external_links/`
+- `tools/`
 
 For each folder, explain:
 
@@ -254,6 +255,23 @@ For each folder, explain:
 Completion standard:
 
 - A contributor should know whether a new file belongs in `shared`, `engines`, `examples`, `components`, or `analysis`.
+
+### `tools/`
+
+Purpose: Store small repository-level helper commands.
+
+Use `tools/` for:
+
+- Checking whether the local environment has expected commands
+- Checking whether required first-version files exist
+- Copying `.env.example` to `.env`
+- Scanning tracked files for likely committed API keys
+
+Do not put experiment runners or data analysis scripts here.
+
+- Data analysis scripts belong in `analysis/scripts/`.
+- LLM simulation runners belong in `engines/llm_simulation/runner/`.
+- Empirica runtime logic belongs in `engines/empirica/`.
 
 ### `.env.example`
 
@@ -1300,4 +1318,3 @@ Public documentation should emphasize this architecture:
 - Mixed human LLM experiments use a bridge.
 - Prompts and models are configurable.
 - Analysis uses shared data schemas.
-

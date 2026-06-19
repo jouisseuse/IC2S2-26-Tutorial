@@ -97,6 +97,7 @@ Then read:
 - `docs/`: Conceptual documentation
 - `assets/`: Screenshots, videos, diagrams, and worksheet templates
 - `external_links/`: Curated learning resources
+- `tools/`: Small setup and repository hygiene helpers
 
 ## Minimal Examples
 

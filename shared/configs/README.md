@@ -2,11 +2,12 @@
 
 Modifiable experiment settings.
 
-TODO:
+Included config files:
 
-- [ ] Create default config
-- [ ] Create human-only config
-- [ ] Create LLM-only config
-- [ ] Create mixed config
-- [ ] Document all config fields
+- `experiment.yaml`: default game, agents, treatment, model, prompt, and logging settings
+- `agents.yaml`: reusable agent composition settings
+- `models.yaml`: mock, OpenAI, and LiteLLM-style model profiles
+- `treatments.yaml`: control, social information, and chat treatment flags
+
+Engines should load these values instead of hard coding group size, prompts, model names, or treatment flags.
 

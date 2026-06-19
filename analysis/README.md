@@ -22,3 +22,9 @@ Do not put experiment runtime code, UI components, prompts, or game rules here. 
 ## Completion Standard
 
 A user should be able to load sample data, reconstruct group outcomes, merge LLM call logs, and create basic plots from exported data.
+
+## Scripts
+
+`analysis/scripts/` contains data analysis scripts only. Use it for cleaning raw exports, reconstructing player-round and group-round data, merging LLM logs, computing outcomes, generating summaries, and preparing figures.
+
+Experiment runners belong in `engines/`, not in `analysis/scripts/`.

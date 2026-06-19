@@ -1,9 +1,14 @@
-# TODO: Document treatment configuration fields.
+# Treatments change what participants or agents know, see, or can do.
 treatments:
   control:
     show_group_average: false
     allow_chat: false
+    feedback_type: own
   social_information:
     show_group_average: true
     allow_chat: false
-
+    feedback_type: group
+  chat:
+    show_group_average: true
+    allow_chat: true
+    feedback_type: group

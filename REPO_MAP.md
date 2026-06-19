@@ -98,6 +98,14 @@ Use it for links to Empirica docs, example repositories, papers, and LLM agent t
 
 Do not copy full copyrighted papers or put unannotated link dumps here.
 
+## `tools/`
+
+Contains small repository-level helper commands.
+
+Use it to check the environment, check required files, copy `.env.example`, or scan for accidentally committed API keys.
+
+Do not put experiment runners or data analysis here. LLM simulation runners belong in `engines/llm_simulation/runner/`; data analysis scripts belong in `analysis/scripts/`.
+
 ## Architecture Summary
 
 Game logic defines the rules. Engines decide where the experiment runs. Agents can be human, LLM, scripted, or random. Models and prompts are configurable. Analysis reconstructs individual and group level outcomes from shared schemas.

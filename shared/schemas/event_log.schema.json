@@ -1,7 +1,54 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jouisseuse.github.io/multiplayer-experiment-framework/schemas/event_log.schema.json",
   "title": "EventLog",
   "type": "object",
-  "description": "TODO: Define shared event log schema with game_id, group_id, round, stage, actor_id, actor_type, action, observation, payoff, treatment, and timestamp."
+  "additionalProperties": true,
+  "required": [
+    "event_id",
+    "event_type",
+    "game_id",
+    "group_id",
+    "round",
+    "stage",
+    "actor_id",
+    "actor_type",
+    "treatment",
+    "timestamp"
+  ],
+  "properties": {
+    "event_id": { "type": "string" },
+    "event_type": {
+      "type": "string",
+      "examples": [
+        "agent_created",
+        "game_start",
+        "round_start",
+        "observation_shown",
+        "action_submitted",
+        "invalid_action",
+        "payoff_computed",
+        "llm_prompt",
+        "llm_raw_response",
+        "llm_parsed_action",
+        "game_end"
+      ]
+    },
+    "game_id": { "type": "string" },
+    "group_id": { "type": "string" },
+    "round": { "type": ["integer", "null"], "minimum": 0 },
+    "stage": { "type": ["string", "null"] },
+    "actor_id": { "type": ["string", "null"] },
+    "actor_type": {
+      "type": ["string", "null"],
+      "enum": ["human", "llm", "scripted", "random", null]
+    },
+    "action": { "type": ["object", "null"] },
+    "observation": { "type": ["object", "null"] },
+    "payoff": { "type": ["number", "null"] },
+    "treatment": { "type": ["string", "null"] },
+    "details": { "type": ["object", "null"] },
+    "timestamp": { "type": "string", "format": "date-time" }
+  }
 }
 

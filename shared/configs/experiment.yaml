@@ -4,12 +4,22 @@ game:
   num_rounds: 5
   endowment: 10
   multiplier: 1.5
+  feedback_type: group
 agents:
   human: 2
   llm: 2
   scripted: 0
+  random: 0
 treatment:
   name: social_information
   show_group_average: true
   allow_chat: false
-
+model:
+  profile: default
+prompt:
+  profile: public_goods
+logging:
+  log_events: true
+  log_llm_calls: true
+  export_jsonl: true
+  export_csv: true

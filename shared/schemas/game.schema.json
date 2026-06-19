@@ -1,7 +1,36 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jouisseuse.github.io/multiplayer-experiment-framework/schemas/game.schema.json",
   "title": "Game",
   "type": "object",
-  "description": "TODO: Define shared game schema."
+  "additionalProperties": true,
+  "required": [
+    "game_id",
+    "game_type",
+    "group_id",
+    "group_size",
+    "num_rounds",
+    "treatment"
+  ],
+  "properties": {
+    "game_id": { "type": "string" },
+    "game_type": { "type": "string" },
+    "group_id": { "type": "string" },
+    "group_size": { "type": "integer", "minimum": 1 },
+    "num_rounds": { "type": "integer", "minimum": 1 },
+    "treatment": { "type": "string" },
+    "agent_composition": {
+      "type": "object",
+      "properties": {
+        "human": { "type": "integer", "minimum": 0 },
+        "llm": { "type": "integer", "minimum": 0 },
+        "scripted": { "type": "integer", "minimum": 0 },
+        "random": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "config": { "type": ["object", "null"] },
+    "started_at": { "type": ["string", "null"], "format": "date-time" },
+    "ended_at": { "type": ["string", "null"], "format": "date-time" }
+  }
 }
 

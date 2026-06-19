@@ -3,5 +3,30 @@ title: "Compare Human, LLM, and Mixed Experiments"
 output: html_document
 ---
 
-TODO: Add R analysis notebook.
+This notebook is a lightweight starting point for comparing human-only,
+LLM-only, and mixed experiments after all exports have been converted to the
+shared schema.
 
+```{r}
+paths <- c(
+  human_only = "../../sample_data/human_only/public_goods/player_round.csv",
+  llm_only = "../../sample_data/llm_only/public_goods/player_round.csv",
+  mixed = "../../sample_data/mixed_human_llm/public_goods/player_round.csv"
+)
+
+available <- paths[file.exists(paths)]
+
+if (length(available) > 0) {
+  datasets <- Map(function(path, mode) {
+    data <- read.csv(path)
+    data$mode <- mode
+    data
+  }, available, names(available))
+  combined <- do.call(rbind, datasets)
+  aggregate(action_value ~ mode + round + actor_type, data = combined, FUN = mean)
+} else {
+  message("No sample data found yet. Generate exports before knitting.")
+}
+```
+
+Compare actor types and modes descriptively before fitting inferential models.
