@@ -18,8 +18,8 @@ This code was prepared with Node.js `20.11.1`, npm `10.2.4`, and `@empirica/core
 ## 1. Clone Only The Useful Repo Content
 
 ```bash
-git clone --filter=blob:none --sparse https://github.com/jouisseuse/multiplayer-experiment-framework.git
-cd multiplayer-experiment-framework
+git clone --filter=blob:none --sparse https://github.com/jouisseuse/IC2S2-26-Tutorial.git
+cd IC2S2-26-Tutorial
 git sparse-checkout set code materials README.md SETUP.md .env.example
 ```
 
@@ -58,7 +58,7 @@ The next step replaces the generated example files with TogetherHire files.
 Set the path to this repository:
 
 ```bash
-REPO_PATH="../multiplayer-experiment-framework"
+REPO_PATH="../IC2S2-26-Tutorial"
 ```
 
 Replace the client files:
@@ -129,10 +129,10 @@ For a quick local test, open two participant windows so the experiment can form 
 
 ## 7. Run The MultiLLM Simulation
 
-From the folder that contains `multiplayer-experiment-framework`:
+From the folder that contains `IC2S2-26-Tutorial`:
 
 ```bash
-cd multiplayer-experiment-framework/code/MultiLLM
+cd IC2S2-26-Tutorial/code/MultiLLM
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
