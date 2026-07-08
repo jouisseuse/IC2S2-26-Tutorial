@@ -1,0 +1,71 @@
+factors:
+    - name: playerCount
+      desc: playerCount determines the number of Players are in a Game.
+      values:
+        - value: 2
+        - value: 10
+    - name: numRounds
+      desc: How many times participants will make a choice
+      values:
+        - value: 1
+        - value: 3
+        - value: 10
+        - value: 30
+    - name: chatEnabled
+      desc: Can players communicate with each other during the game?
+      values:
+        - value: true
+        - value: false
+    - name: type
+      values:
+        - value: communication
+treatments:
+    - name: Test-non-communication
+      desc: Test Two-player Game without communication
+      factors:
+        chatEnabled: false
+        numRounds: 3
+        playerCount: 2
+        type: non-communication
+    - name: Standard-communication
+      desc: 50-rounds 10-player Game with communication
+      factors:
+        chatEnabled: true
+        numRounds: 50
+        playerCount: 10
+        type: communication
+    - name: Standard-non-communication
+      desc: 50-rounds 10-player Game without communication
+      factors:
+        chatEnabled: false
+        numRounds: 50
+        playerCount: 10
+        type: non-communication
+    - name: Combined-Treatment
+      desc: Non-communication followed by Communication
+      factors:
+        chatEnabled: false
+        numRounds: 3
+        playerCount: 2
+        type: combined
+    - name: 5-communication
+      desc: 50-rounds 5-player Game with communication
+      factors:
+        chatEnabled: true
+        numRounds: 50
+        playerCount: 5
+        type: communication
+    - name: 5-non-communication
+      desc: 50-rounds 5-player Game without communication
+      factors:
+        chatEnabled: false
+        numRounds: 50
+        playerCount: 5
+        type: non-communication
+    - name: Test-communication
+      desc: Test Two-player Game with communication
+      factors:
+        chatEnabled: true
+        numRounds: 3
+        playerCount: 2
+        type: communication

@@ -1,133 +1,194 @@
 # Setup
 
-This guide helps you prepare the repository for the tutorial.
+These instructions are written for tutorial participants. They assume you can copy and paste commands into a terminal, but do not assume prior Empirica experience.
 
-## System Requirements
+## Requirements
 
-Recommended:
+Install these before the tutorial:
 
-- Node.js 20.12.0 or newer
-- npm 10 or newer
 - Git
-- A modern browser such as Chrome, Edge, or Firefox
-- Optional for analysis: Python 3.10 or newer
-- Optional for R notebooks: R and RStudio
+- Node.js 20 or newer
+- npm 10 or newer
+- Empirica
+- Python 3.10 or newer
+- pip
 
-## Clone the Repository
+This code was prepared with Node.js `20.11.1`, npm `10.2.4`, and `@empirica/core` `1.12.4`.
+
+## 1. Clone Only The Useful Repo Content
 
 ```bash
-git clone https://github.com/jouisseuse/multiplayer-experiment-framework.git
+git clone --filter=blob:none --sparse https://github.com/jouisseuse/multiplayer-experiment-framework.git
 cd multiplayer-experiment-framework
+git sparse-checkout set code materials README.md SETUP.md .env.example
 ```
 
-## Install Dependencies
+If you already cloned the full repository, you can skip this step.
 
-For the minimal Empirica example, use the example folder:
+## 2. Install Empirica
+
+The official Empirica quick start uses this installer:
 
 ```bash
-cd engines/empirica/human_only/minimal_two_player_choice
-npm run install:all
+curl -fsS https://install.empirica.dev | sh
 ```
 
-## Set Environment Variables
-
-Copy the environment template:
+Confirm Empirica works:
 
 ```bash
-cp .env.example .env
+empirica version
 ```
 
-The tutorial should work with mock LLM agents by default. Real API keys are optional.
+If this command prints a version number, Empirica is available from your terminal.
 
-Do not commit `.env`.
+## 3. Create A Fresh Empirica Project
 
-## Run Human Only Empirica Example
-
-Run the minimal human-only experiment:
+Create a new project outside this repository:
 
 ```bash
-cd engines/empirica/human_only/minimal_two_player_choice
-npm run install:all
-npm run dev
+cd ..
+empirica create my-experiment
+cd my-experiment
 ```
 
-Expected result:
+The next step replaces the generated example files with TogetherHire files.
 
-- Empirica starts locally.
-- The admin panel opens or prints a local URL.
-- You can open two participant windows.
-- Each participant makes one decision.
-- A feedback page appears.
+## 4. Replace The Empirica Files
 
-## Run LLM Only Simulation with Mock Model
-
-Placeholder command for the mock LLM simulation:
+Set the path to this repository:
 
 ```bash
-cd engines/llm_simulation
+REPO_PATH="../multiplayer-experiment-framework"
+```
+
+Replace the client files:
+
+```bash
+rm -rf client/src
+cp -R "$REPO_PATH/code/TogetherHire/client/src" client/src
+cp "$REPO_PATH/code/TogetherHire/client/index.html" client/index.html
+cp "$REPO_PATH/code/TogetherHire/client/jsconfig.json" client/jsconfig.json
+cp "$REPO_PATH/code/TogetherHire/client/package.json" client/package.json
+cp "$REPO_PATH/code/TogetherHire/client/package-lock.json" client/package-lock.json
+cp "$REPO_PATH/code/TogetherHire/client/uno.config.ts" client/uno.config.ts
+cp "$REPO_PATH/code/TogetherHire/client/vite.config.js" client/vite.config.js
+```
+
+Replace the server files:
+
+```bash
+rm -rf server/src
+cp -R "$REPO_PATH/code/TogetherHire/server/src" server/src
+cp "$REPO_PATH/code/TogetherHire/server/jsconfig.json" server/jsconfig.json
+cp "$REPO_PATH/code/TogetherHire/server/package.json" server/package.json
+cp "$REPO_PATH/code/TogetherHire/server/package-lock.json" server/package-lock.json
+```
+
+Replace the Empirica treatment and lobby settings:
+
+```bash
+cp "$REPO_PATH/code/TogetherHire/.empirica/treatments.yaml" .empirica/treatments.yaml
+cp "$REPO_PATH/code/TogetherHire/.empirica/lobbies.yaml" .empirica/lobbies.yaml
+```
+
+Do not replace `.empirica/local/`, `.empirica/id`, or `.empirica/release`. Those are local files created by Empirica.
+
+## 5. Install Dependencies
+
+Install the client dependencies:
+
+```bash
+cd client
 npm install
-npm run simulate:mock
 ```
 
-Expected result once implemented:
-
-- The simulation runs without real API keys.
-- Mock agents make decisions.
-- Output is exported using the shared schema.
-
-## Run Mixed Human and LLM Example
-
-Placeholder command for the mixed experiment:
+Install the server dependencies:
 
 ```bash
-cd examples/mixed_human_llm/06_mixed_public_goods
+cd ../server
 npm install
-npm run dev
 ```
 
-Expected result once implemented:
+Return to the Empirica project root:
 
-- Human participants act through Empirica.
-- LLM agents act through the model adapter.
-- Both actor types are logged using the same event schema.
+```bash
+cd ..
+```
+
+## 6. Run The TogetherHire Experiment
+
+From the root of `my-experiment`, run:
+
+```bash
+empirica
+```
+
+Open the local participant and admin links printed by Empirica.
+
+For a quick local test, open two participant windows so the experiment can form a group.
+
+## 7. Run The MultiLLM Simulation
+
+From the folder that contains `multiplayer-experiment-framework`:
+
+```bash
+cd multiplayer-experiment-framework/code/MultiLLM
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Set an API key:
+
+```bash
+export OPENAI_API_KEY="your-api-key"
+export OPENAI_BASE_URL="https://api.openai.com/v1"
+```
+
+Then run:
+
+```bash
+python mamab_llm.py
+```
+
+For a quick local tutorial edit, you can also paste a temporary key into `DIRECT_API_KEY` near the top of `mamab_llm.py`. Do not commit real API keys.
 
 ## Troubleshooting
 
-### Node Version Error
+### `vite: not found`
 
-Check your version:
+Run `npm install` inside the `client` folder.
 
 ```bash
-node --version
-npm --version
+cd client
+npm install
 ```
 
-Use Node.js 20 or newer if possible.
+### `esbuild: not found`
 
-### Empirica Command Not Found
+Run `npm install` inside the `server` folder.
 
-Run `npm install` in the relevant Empirica example folder. If the command still fails, use the instructor demo or screenshots during the tutorial.
+```bash
+cd server
+npm install
+```
 
-### Port Already in Use
+### `empirica: command not found`
 
-Close other local servers or change the port if the example supports it.
+Empirica is not installed, or it is not on your terminal `PATH`. Reinstall Empirica and confirm:
 
-### Cannot Open Admin Panel
+```bash
+empirica version
+```
 
-Check the terminal output for the local URL. Make sure the server is still running.
+### Port already in use
 
-### LLM API Key Missing
+Stop the old Empirica process with `Ctrl+C`, then run `empirica` again.
 
-Use the mock model. The basic tutorial should not require paid API access.
+### Missing LLM API key
 
-### Model Call Failed
+Set `OPENAI_API_KEY`, or paste a temporary key into `DIRECT_API_KEY` for a local run. Never commit real keys.
 
-Switch to `USE_MOCK_MODEL=true` in `.env` and rerun the simulation.
+### Model call failed
 
-### Data Export Not Found
-
-Check the example README for the export location. If exports are not available, use sample data in `analysis/sample_data/`.
-
-## Tutorial Backup Plan
-
-If local setup fails, use [SETUP_BACKUP.md](SETUP_BACKUP.md). You can still follow the tutorial with screenshots, sample data, a mock simulation, or the instructor demo.
+Check that your API key, base URL, model name, and internet connection are working.

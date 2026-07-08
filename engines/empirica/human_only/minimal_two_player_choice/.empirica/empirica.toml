@@ -1,9 +1,0 @@
-name = "minimal-two-player-choice"
-
-[tajriba.auth]
-srtoken = "dev-service-token"
-
-[[tajriba.auth.users]]
-name = "Admin"
-username = "admin"
-password = "adminadmin"
