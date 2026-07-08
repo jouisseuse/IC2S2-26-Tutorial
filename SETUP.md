@@ -7,20 +7,20 @@ These instructions are written for tutorial participants. They assume you can co
 Install these before the tutorial:
 
 - Git
-- Node.js 20 or newer
+- Node.js 20.12 or newer
 - npm 10 or newer
 - Empirica
 - Python 3.10 or newer
 - pip
 
-This code was prepared with Node.js `20.11.1`, npm `10.2.4`, and `@empirica/core` `1.12.4`.
+This code uses `@empirica/core` `1.12.4`, which requires Node.js `20.12.0` or newer. npm `10` or newer is recommended.
 
 ## 1. Clone Only The Useful Repo Content
 
 ```bash
 git clone --filter=blob:none --sparse https://github.com/jouisseuse/IC2S2-26-Tutorial.git
 cd IC2S2-26-Tutorial
-git sparse-checkout set code materials README.md SETUP.md .env.example
+git sparse-checkout set code materials
 ```
 
 If you already cloned the full repository, you can skip this step.
