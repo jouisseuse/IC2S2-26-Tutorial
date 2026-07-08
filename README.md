@@ -13,7 +13,7 @@ TogetherHire is an Empirica experiment where participants act as hiring managers
 
 ## Start Here
 
-Open [SETUP.md](/home/ubuntu/tutorial/multiplayer-experiment-framework/SETUP.md) and follow the steps in order.
+Open [SETUP.md](SETUP.md) and follow the steps in order.
 
 The basic workflow is:
 
