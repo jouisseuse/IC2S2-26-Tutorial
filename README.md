@@ -10,35 +10,30 @@ TogetherHire is an Empirica experiment where participants act as hiring managers
 - `code/MultiLLM/`: Python code for running the LLM simulation.
 - `materials/`: slides, figures, handouts, or notes for the tutorial.
 - `setup_togetherhire.sh`: automated setup script for macOS, Linux, and WSL.
-- `setup_togetherhire_windows.ps1`: Windows PowerShell wrapper that runs the setup inside WSL.
+- `setup_togetherhire_windows.ps1`: Windows PowerShell setup script that installs/checks WSL Ubuntu and then runs the WSL setup.
 
 ## Requirements
 
-Install these before running the tutorial setup:
+For macOS, Linux, or an already working WSL terminal:
 
 - Git
-- Node.js 20.12 or newer, for macOS/Linux/WSL setup
+- Node.js 20.12 or newer
 - npm 10 or newer recommended
 - Python 3.10 or newer, only needed for the MultiLLM code
 - pip, only needed for the MultiLLM code
 
+For Windows PowerShell:
+
+- Git for Windows, so you can clone this repository
+- Windows 10/11 with WSL support
+
 The setup scripts can install Empirica automatically if the `empirica` command is missing.
 
-## Windows Users
+## Windows PowerShell Quick Start
 
-Do not run the Empirica installer directly in Windows PowerShell or Command Prompt. The command `curl ... | sh` expects a Unix-like shell, and Empirica is not currently supported as a native Windows install.
+Do not run `curl ... | sh` directly in Windows PowerShell or Command Prompt. That command expects a Unix-like shell, and Empirica is not currently supported as a native Windows install.
 
-Use WSL 2 instead. In PowerShell, install WSL first:
-
-```powershell
-wsl --install
-```
-
-Restart if Windows asks you to, then finish the Ubuntu setup. After WSL is ready, use the Windows setup wrapper below.
-
-## Quick Start On Windows PowerShell
-
-Clone this repo in PowerShell:
+Instead, clone this repo in PowerShell:
 
 ```powershell
 git clone --filter=blob:none --sparse https://github.com/jouisseuse/IC2S2-26-Tutorial.git
@@ -46,15 +41,29 @@ cd IC2S2-26-Tutorial
 git sparse-checkout set code materials
 ```
 
-Run the Windows wrapper:
+Then run the Windows setup script:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\setup_togetherhire_windows.ps1
 ```
 
-The wrapper will use WSL, clone the tutorial repo inside the WSL home directory, run the Linux setup script there, and print the command to start the game.
+What it does:
 
-## Quick Start On macOS, Linux, Or WSL
+1. Checks whether WSL is available.
+2. If WSL Ubuntu is missing, tries to run `wsl --install -d Ubuntu`.
+3. If Windows asks for a restart or Ubuntu asks for username/password setup, finish that and rerun the same PowerShell command.
+4. Once WSL is ready, clones this repo inside the WSL home directory.
+5. Runs `setup_togetherhire.sh` inside WSL.
+6. Prints the command to start the game.
+
+After setup finishes, open Ubuntu/WSL and run:
+
+```bash
+cd ~/my-experiment
+empirica
+```
+
+## macOS, Linux, Or WSL Quick Start
 
 Clone the tutorial repo:
 
@@ -81,21 +90,10 @@ The script will:
 7. Briefly start Empirica to confirm the app boots.
 8. Stop the test server and print the command to start the game.
 
-## Start The Game
-
-After setup finishes, run the command printed by the script.
-
-For the default macOS/Linux/WSL setup, that is:
+After setup finishes, run:
 
 ```bash
 cd ../my-experiment
-empirica
-```
-
-For the default Windows wrapper setup, open Ubuntu/WSL and run:
-
-```bash
-cd ~/my-experiment
 empirica
 ```
 
@@ -115,13 +113,13 @@ Use a different project folder from Windows PowerShell:
 powershell -ExecutionPolicy Bypass -File .\setup_togetherhire_windows.ps1 -ProjectDir "~/my-togetherhire-test"
 ```
 
-Skip the short startup test:
+Skip the short startup test on macOS/Linux/WSL:
 
 ```bash
 RUN_STARTUP_TEST=0 bash setup_togetherhire.sh
 ```
 
-From Windows PowerShell:
+Skip the short startup test from Windows PowerShell:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\setup_togetherhire_windows.ps1 -SkipStartupTest
@@ -157,13 +155,15 @@ For a quick local tutorial edit, you can also paste a temporary key into `DIRECT
 
 ### `curl ... | sh` fails on Windows
 
-Run it inside Ubuntu/WSL, not PowerShell or Command Prompt. In PowerShell, use:
+Run it inside Ubuntu/WSL, not PowerShell or Command Prompt. From PowerShell, use the wrapper instead:
 
 ```powershell
-wsl --install
+powershell -ExecutionPolicy Bypass -File .\setup_togetherhire_windows.ps1
 ```
 
-Then either open Ubuntu/WSL and use the macOS/Linux/WSL instructions, or run:
+### WSL installation starts but setup does not continue
+
+This is expected on first-time Windows setup. Restart Windows if prompted, open Ubuntu once, finish the username/password setup, then rerun:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\setup_togetherhire_windows.ps1
@@ -171,7 +171,7 @@ powershell -ExecutionPolicy Bypass -File .\setup_togetherhire_windows.ps1
 
 ### Node.js is too old
 
-Install Node.js 20.12 or newer. `@empirica/core` requires Node.js `>=20.12.0`.
+Install Node.js 20.12 or newer inside macOS, Linux, or WSL. `@empirica/core` requires Node.js `>=20.12.0`.
 
 ### Target folder already exists
 

@@ -8,6 +8,7 @@ param(
 $ErrorActionPreference = "Stop"
 $RepoUrl = "https://github.com/jouisseuse/IC2S2-26-Tutorial.git"
 $RepoDir = "IC2S2-26-Tutorial"
+$UbuntuDistro = "Ubuntu"
 
 function Step($Message) {
     Write-Host ""
@@ -28,17 +29,46 @@ function Quote-Bash([string]$Value) {
     return "'" + $Value.Replace("'", "'\"'\"'") + "'"
 }
 
+function Install-WslUbuntuAndExit($Reason) {
+    Step "Install WSL Ubuntu"
+    Info $Reason
+    Info "Running: wsl --install -d $UbuntuDistro"
+    Info "Windows may ask for administrator approval or a restart."
+
+    & wsl.exe --install -d $UbuntuDistro
+    if ($LASTEXITCODE -ne 0) {
+        Fail "WSL installation did not complete. Try running PowerShell as Administrator, then run: wsl --install -d Ubuntu"
+    }
+
+    Write-Host ""
+    Write-Host "WSL/Ubuntu installation has been triggered."
+    Write-Host "If Windows asks you to restart, restart first."
+    Write-Host "Then open Ubuntu once, finish the username/password setup, and rerun:"
+    Write-Host "  powershell -ExecutionPolicy Bypass -File .\setup_togetherhire_windows.ps1"
+    exit 0
+}
+
 Step "Check WSL"
 if (-not (Get-Command wsl.exe -ErrorAction SilentlyContinue)) {
-    Fail "WSL is not installed. In PowerShell, run: wsl --install. Restart Windows if prompted, then run this script again."
+    Fail "wsl.exe is not available on this Windows system. Update Windows, then run PowerShell as Administrator and try: wsl --install -d Ubuntu"
+}
+
+& wsl.exe --status | Out-Null
+if ($LASTEXITCODE -ne 0) {
+    Install-WslUbuntuAndExit "WSL is available but not initialized."
+}
+
+$distroList = & wsl.exe -l -q 2>$null
+if ($LASTEXITCODE -ne 0 -or -not ($distroList | Where-Object { $_.Trim().Length -gt 0 })) {
+    Install-WslUbuntuAndExit "No WSL Linux distribution is installed yet."
 }
 
 & wsl.exe sh -lc "printf WSL_OK" | Out-Null
 if ($LASTEXITCODE -ne 0) {
-    Fail "WSL is installed but no Linux distribution is ready. Run: wsl --install -d Ubuntu, finish Ubuntu setup, then run this script again."
+    Install-WslUbuntuAndExit "WSL is installed, but no default Linux shell is ready."
 }
 
-Info "WSL is available. The actual setup will run inside Ubuntu/WSL, not native Windows."
+Info "WSL is ready. The actual setup will run inside Ubuntu/WSL, not native Windows."
 
 $envParts = @()
 if ($SkipStartupTest) { $envParts += "RUN_STARTUP_TEST=0" }
