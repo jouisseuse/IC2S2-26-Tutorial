@@ -9,86 +9,80 @@ TogetherHire is an Empirica experiment where participants act as hiring managers
 - `code/TogetherHire/`: source files and Empirica configuration for the human participant experiment.
 - `code/MultiLLM/`: Python code for running the LLM simulation.
 - `materials/`: slides, figures, handouts, or notes for the tutorial.
-- `setup_togetherhire.sh`: automated setup script for macOS, Linux, and WSL.
-- `setup_togetherhire_windows.ps1`: Windows PowerShell setup script that installs/checks WSL Ubuntu and then runs the WSL setup.
+- `setup_togetherhire.sh`: setup script for macOS, Linux, and Ubuntu/WSL.
 
-## Requirements
+## Setup Overview
 
-For macOS, Linux, or an already working WSL terminal:
+The setup has three steps:
+
+1. Prepare a Unix-like environment with Git, Node.js, npm, and Empirica.
+2. Clone this repository and run `setup_togetherhire.sh`.
+3. Start the Empirica game with `empirica`.
+
+Windows users should use Ubuntu through WSL. After Ubuntu/WSL is open, the commands are the same as macOS and Linux.
+
+## Step 1: Prepare Your Environment
+
+### Windows
+
+Empirica does not natively support Windows, but you can use it by installing WSL. See the official guide: [Empirica Windows WSL instructions](https://docs.empirica.ly/getting-started/setup/windows-wsl-instructions-new).
+
+In PowerShell, run:
+
+```powershell
+wsl --install
+```
+
+You may be prompted to create a username and password. Make sure to write down your login credentials for the future.
+
+Note: Copying and pasting may be disabled in the default settings of your WSL terminal. To remedy this, right-click the title bar and select `Properties -> Options -> Use Ctrl+Shift+C/V as Copy/Paste`.
+
+After WSL is ready, do all tutorial setup commands inside the Ubuntu terminal, not PowerShell. Inside Ubuntu, install or confirm these tools:
 
 - Git
 - Node.js 20.12 or newer
 - npm 10 or newer recommended
-- Python 3.10 or newer, only needed for the MultiLLM code
-- pip, only needed for the MultiLLM code
+- Empirica
 
-For Windows PowerShell:
+### macOS Or Linux
 
-- Git for Windows, so you can clone this repository
-- Windows 10/11 with WSL support
+Install or confirm these tools in your normal terminal:
 
-The setup scripts can install Empirica automatically if the `empirica` command is missing.
+- Git
+- Node.js 20.12 or newer
+- npm 10 or newer recommended
+- Empirica
 
-## Windows PowerShell Quick Start
+### Optional Python Tools
 
-Do not run `curl ... | sh` directly in Windows PowerShell or Command Prompt. That command expects a Unix-like shell, and Empirica is not currently supported as a native Windows install.
+For the MultiLLM simulation, also install:
 
-Instead, clone this repo in PowerShell:
+- Python 3.10 or newer
+- pip
 
-```powershell
-git clone --filter=blob:none --sparse https://github.com/jouisseuse/IC2S2-26-Tutorial.git
-cd IC2S2-26-Tutorial
-git sparse-checkout set code materials
-```
+## Step 2: Clone The Repo And Run Setup
 
-Then run the Windows setup script:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\setup_togetherhire_windows.ps1
-```
-
-What it does:
-
-1. Checks whether WSL is available.
-2. If WSL Ubuntu is missing, tries to run `wsl --install -d Ubuntu`.
-3. If Windows asks for a restart or Ubuntu asks for username/password setup, finish that and rerun the same PowerShell command.
-4. Once WSL is ready, clones this repo inside the WSL home directory.
-5. Runs `setup_togetherhire.sh` inside WSL.
-6. Prints the command to start the game.
-
-After setup finishes, open Ubuntu/WSL and run:
-
-```bash
-cd ~/my-experiment
-empirica
-```
-
-## macOS, Linux, Or WSL Quick Start
-
-Clone the tutorial repo:
+Run these commands in macOS Terminal, Linux terminal, or Ubuntu/WSL terminal:
 
 ```bash
 git clone --filter=blob:none --sparse https://github.com/jouisseuse/IC2S2-26-Tutorial.git
 cd IC2S2-26-Tutorial
 git sparse-checkout set code materials
-```
-
-Run the automated setup:
-
-```bash
 bash setup_togetherhire.sh
 ```
 
-The script will:
+The setup script will:
 
 1. Check your operating system.
 2. Check Node.js and npm.
-3. Check or install Empirica.
+3. Check Empirica.
 4. Create a fresh Empirica project at `../my-experiment`.
 5. Copy the TogetherHire client, server, and Empirica config files.
 6. Run `npm install` in both `client` and `server`.
 7. Briefly start Empirica to confirm the app boots.
 8. Stop the test server and print the command to start the game.
+
+## Step 3: Start The Game
 
 After setup finishes, run:
 
@@ -101,41 +95,23 @@ Empirica will print local Player and Admin URLs. For a quick local test, open tw
 
 ## Script Options
 
-Use a different project folder on macOS/Linux/WSL:
+Use a different project folder:
 
 ```bash
 bash setup_togetherhire.sh ../my-togetherhire-test
 ```
 
-Use a different project folder from Windows PowerShell:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\setup_togetherhire_windows.ps1 -ProjectDir "~/my-togetherhire-test"
-```
-
-Skip the short startup test on macOS/Linux/WSL:
+Skip the short startup test:
 
 ```bash
 RUN_STARTUP_TEST=0 bash setup_togetherhire.sh
 ```
 
-Skip the short startup test from Windows PowerShell:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\setup_togetherhire_windows.ps1 -SkipStartupTest
-```
-
-Disable automatic Empirica installation on macOS/Linux/WSL:
-
-```bash
-INSTALL_EMPIRICA=0 bash setup_togetherhire.sh
-```
-
-The scripts stop if the target project folder already exists. This avoids overwriting your existing work.
+The script stops if the target project folder already exists. This avoids overwriting your existing work.
 
 ## MultiLLM Setup
 
-The automated setup scripts only prepare and test the Empirica experiment.
+The setup script only prepares and tests the Empirica experiment.
 
 To run the MultiLLM simulation:
 
@@ -155,23 +131,23 @@ For a quick local tutorial edit, you can also paste a temporary key into `DIRECT
 
 ### `curl ... | sh` fails on Windows
 
-Run it inside Ubuntu/WSL, not PowerShell or Command Prompt. From PowerShell, use the wrapper instead:
+Run the Empirica installer inside Ubuntu/WSL, not PowerShell or Command Prompt.
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\setup_togetherhire_windows.ps1
-```
+### WSL is not ready
 
-### WSL installation starts but setup does not continue
-
-This is expected on first-time Windows setup. Restart Windows if prompted, open Ubuntu once, finish the username/password setup, then rerun:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\setup_togetherhire_windows.ps1
-```
+Install and initialize Ubuntu/WSL first. Open Ubuntu once and finish the username/password setup. Then run the tutorial commands inside Ubuntu.
 
 ### Node.js is too old
 
-Install Node.js 20.12 or newer inside macOS, Linux, or WSL. `@empirica/core` requires Node.js `>=20.12.0`.
+Install Node.js 20.12 or newer inside macOS, Linux, or Ubuntu/WSL. `@empirica/core` requires Node.js `>=20.12.0`.
+
+### Empirica is missing
+
+Install Empirica inside macOS, Linux, or Ubuntu/WSL before running the setup script. Then confirm:
+
+```bash
+empirica version
+```
 
 ### Target folder already exists
 
@@ -205,14 +181,6 @@ The server dependencies were not installed. Re-run the script, or run:
 ```bash
 cd ../my-experiment/server
 npm install
-```
-
-### `empirica: command not found`
-
-Open a new terminal and try again. On Windows, open Ubuntu/WSL, not PowerShell or Command Prompt. If it still fails inside macOS, Linux, or WSL, reinstall Empirica:
-
-```bash
-curl -fsS https://install.empirica.dev | sh
 ```
 
 ### Port already in use when starting the game

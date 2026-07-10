@@ -6,7 +6,6 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DEFAULT_EXPERIMENT_DIR="$SCRIPT_DIR/../my-experiment"
 EXPERIMENT_DIR="${1:-$DEFAULT_EXPERIMENT_DIR}"
 START_EMPIRICA="${START_EMPIRICA:-0}"
-INSTALL_EMPIRICA="${INSTALL_EMPIRICA:-1}"
 ALLOW_UNSUPPORTED_NODE="${ALLOW_UNSUPPORTED_NODE:-0}"
 RUN_STARTUP_TEST="${RUN_STARTUP_TEST:-1}"
 STARTUP_TEST_SECONDS="${STARTUP_TEST_SECONDS:-15}"
@@ -55,7 +54,7 @@ check_platform() {
 
   case "$os_name" in
     MINGW*|MSYS*|CYGWIN*)
-      die "Native Windows shells are not supported by Empirica. Use WSL 2 with Ubuntu, then run this script inside the WSL terminal. From PowerShell, use: .\\setup_togetherhire_windows.ps1"
+      die "Native Windows shells are not supported by Empirica. Open Ubuntu through WSL, then run this script inside the Ubuntu/WSL terminal."
       ;;
     Linux*|Darwin*)
       ok "Unix-like environment detected."
@@ -123,28 +122,7 @@ ensure_empirica() {
     return
   fi
 
-  if [[ "$INSTALL_EMPIRICA" != "1" ]]; then
-    die "Empirica is not installed. Install it manually, or rerun with INSTALL_EMPIRICA=1."
-  fi
-
-  command_exists curl || die "curl is required to install Empirica automatically."
-
-  info "Empirica was not found. Installing with the official installer."
-  curl -fsS https://install.empirica.dev | sh
-  hash -r || true
-
-  if command_exists empirica; then
-    EMPIRICA_BIN="$(command -v empirica)"
-  elif [[ -x "$HOME/.empirica/bin/empirica" ]]; then
-    EMPIRICA_BIN="$HOME/.empirica/bin/empirica"
-  elif [[ -x "$HOME/.local/bin/empirica" ]]; then
-    EMPIRICA_BIN="$HOME/.local/bin/empirica"
-  else
-    die "Empirica installed, but the empirica command is not on PATH. Open a new terminal and run this script again."
-  fi
-
-  "$EMPIRICA_BIN" version
-  ok "Empirica is ready."
+  die "Empirica is not installed or not on PATH. Install Empirica first, confirm with: empirica version, then run this script again."
 }
 
 check_source_files() {
