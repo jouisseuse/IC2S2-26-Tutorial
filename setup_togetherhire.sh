@@ -322,6 +322,8 @@ main() {
   printf "\nTogetherHire automated setup\n"
   printf "Repository: %s\n" "$SCRIPT_DIR"
   printf "Experiment: %s\n" "$abs_experiment_dir"
+  printf "\nThis script checks prerequisites and sets up the TogetherHire game.\n"
+  printf "It does not install Git, Node.js, npm, or Empirica. Install those first.\n"
 
   check_platform
   check_node
