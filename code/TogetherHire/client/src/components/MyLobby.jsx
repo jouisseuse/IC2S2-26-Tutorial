@@ -1,9 +1,7 @@
-// path: src/lobby/MyLobby.jsx
 import React, { useMemo, useState } from "react";
-import { usePlayer, usePlayers } from "@empirica/core/player/classic/react";
+import { usePlayer } from "@empirica/core/player/classic/react";
 import { LoadingOverlay } from "../components/LoadingOverlay.jsx";
 
-// Joke trivia (answers are 0-based)
 const TRIVIA = [
   {
     q: "Why don’t eggs tell jokes?",
@@ -146,7 +144,6 @@ function TriviaCard() {
       <div className="rounded-2xl p-[1px] bg-gradient-to-r from-indigo-300 via-sky-300 to-cyan-300">
         <div className="rounded-2xl bg-white">
           <div className="p-5">
-            {/* Header */}
             <div className="flex items-center justify-between">
               <div className="text-sm font-medium text-gray-500">
                 Trivia (optional)
@@ -156,7 +153,6 @@ function TriviaCard() {
               </div>
             </div>
 
-            {/* Progress bar */}
             <div className="mt-3 h-2 w-full bg-gray-100 rounded-full overflow-hidden">
               <div
                 className="h-full rounded-full"
@@ -171,12 +167,10 @@ function TriviaCard() {
 
             {!done ? (
               <>
-                {/* Question */}
                 <div className="mt-4 text-xl font-semibold text-gray-900 leading-snug">
                   {item.q}
                 </div>
 
-                {/* Choices */}
                 <div className="mt-4 space-y-2">
                   {item.choices.map((text, i) => {
                     const selected = picked === i;
@@ -219,7 +213,6 @@ function TriviaCard() {
                   })}
                 </div>
 
-                {/* Feedback + Controls */}
                 <div className="mt-4 flex items-center justify-between">
                   <div className="min-h-[24px] text-sm text-gray-600">
                     {picked === null
@@ -281,16 +274,11 @@ function TriviaCard() {
 
 export function MyLobby() {
   const player = usePlayer();
-  const players = usePlayers() || [];
 
   const treatment = useMemo(() => player?.get("treatment") || {}, [player]);
   const estimatedMs = Number.isFinite(Number(treatment?.lobbyDurationSec))
     ? Math.max(0, Number(treatment.lobbyDurationSec) * 1000)
     : undefined;
-
-  const intro =
-    "We’re waiting for a few more participants to join. Thanks for your patience. Let’s do some trivia and see how well you do.";
-
 
   return (
     <div className="min-h-[60vh] w-full flex items-center justify-center p-4">
@@ -302,11 +290,10 @@ export function MyLobby() {
           </div>
         </div>
         <LoadingOverlay
-          title={<span>Let’s do some trivia and see how well you do🤓<br/>Preparing the game…</span>}
+          title={<span>Let’s do some trivia and see how well you do🤓<br />Preparing the game…</span>}
           estimatedMs={estimatedMs}
         />
         <TriviaCard />
-
       </div>
     </div>
   );

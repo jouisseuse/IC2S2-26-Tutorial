@@ -1,6 +1,5 @@
 import React from "react";
 import { Button } from "../components/Button";
-import { useGame, useRound } from "@empirica/core/player/classic/react";
 
 export function Introduction({ next }) {
   return (

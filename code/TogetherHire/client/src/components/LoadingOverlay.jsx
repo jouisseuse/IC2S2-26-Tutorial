@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 
-// why: 小而全的等待组件；可传 estimatedMs 展示剩余时间与进度条
 export function LoadingOverlay({ title = "Loading…", estimatedMs }) {
   const startAt = useRef(performance.now());
   const [now, setNow] = useState(performance.now());
@@ -30,7 +29,6 @@ export function LoadingOverlay({ title = "Loading…", estimatedMs }) {
       <div className="w-full max-w-md bg-white rounded-2xl shadow p-6">
         <div className="text-lg font-semibold text-center">{title}</div>
 
-        {/* 你原版 SVG spinner */}
         <div className="mt-4 flex items-center justify-center">
           <svg
             width="44"
@@ -52,7 +50,6 @@ export function LoadingOverlay({ title = "Loading…", estimatedMs }) {
           </svg>
         </div>
 
-        {/* 可选：倒计时与进度条 */}
         {typeof rem === "number" && (
           <>
             <div className="mt-3 text-center text-sm text-gray-600">~{fmt(rem)} left</div>

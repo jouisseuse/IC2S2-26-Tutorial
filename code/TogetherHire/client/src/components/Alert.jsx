@@ -1,36 +1,41 @@
 import React from "react";
 
+const stylesByKind = {
+  normal: {
+    bg: "bg-empirica-50",
+    icon: "text-empirica-400",
+    title: "text-empirica-800",
+    body: "text-empirica-700",
+  },
+  warn: {
+    bg: "bg-yellow-50",
+    icon: "text-yellow-400",
+    title: "text-yellow-800",
+    body: "text-yellow-700",
+  },
+  error: {
+    bg: "bg-red-50",
+    icon: "text-red-400",
+    title: "text-red-800",
+    body: "text-red-700",
+  },
+  success: {
+    bg: "bg-green-50",
+    icon: "text-green-400",
+    title: "text-green-800",
+    body: "text-green-700",
+  },
+};
+
 export function Alert({ children, title, kind = "normal" }) {
-  let bg, icn, ttl, chld;
-  switch (kind) {
-    case "warn":
-      bg = "bg-yellow-50";
-      icn = "text-yellow-400";
-      ttl = "text-yellow-800";
-      chld = "text-yellow-700";
-    case "error":
-      bg = "bg-red-50";
-      icn = "text-red-400";
-      ttl = "text-red-800";
-      chld = "text-red-700";
-    case "success":
-      bg = "bg-green-50";
-      icn = "text-green-400";
-      ttl = "text-green-800";
-      chld = "text-green-700";
-    default:
-      bg = "bg-empirica-50";
-      icn = "text-empirica-400";
-      ttl = "text-empirica-800";
-      chld = "text-empirica-700";
-  }
+  const styles = stylesByKind[kind] || stylesByKind.normal;
 
   return (
-    <div className={`rounded-md p-4 ${bg}`}>
+    <div className={`rounded-md p-4 ${styles.bg}`}>
       <div className="flex">
         <div className="flex-shrink-0">
           <svg
-            className={`h-5 w-5 ${icn}`}
+            className={`h-5 w-5 ${styles.icon}`}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
@@ -44,10 +49,8 @@ export function Alert({ children, title, kind = "normal" }) {
           </svg>
         </div>
         <div className="ml-3">
-          <h3 className={`text-sm font-medium ${ttl}`}>{title}</h3>
-          <div className={`mt-2 text-sm text-yellow-700 ${chld}`}>
-            {children}
-          </div>
+          <h3 className={`text-sm font-medium ${styles.title}`}>{title}</h3>
+          <div className={`mt-2 text-sm ${styles.body}`}>{children}</div>
         </div>
       </div>
     </div>

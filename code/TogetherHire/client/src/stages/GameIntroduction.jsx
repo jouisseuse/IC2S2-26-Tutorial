@@ -11,9 +11,7 @@ export function GameIntroduction() {
     return <div>Loading...</div>;
   }
 
-  // console.log(`[gameintro] ${round}`);
-  // console.log(round.get("chatEnabled"));
-  const chatEnabled = round.get("chatEnabled")
+  const chatEnabled = round.get("chatEnabled");
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -33,7 +31,7 @@ export function GameIntroduction() {
           </p>
         ) : (
           <p className="text-gray-700 text-lg leading-8 mb-6">
-            🗣️ This round <strong>does not include communication</strong>. After making your decision, you will not see the choices and results of other committee members.You can use your prior information to refine your decisions.
+            🗣️ This round <strong>does not include communication</strong>. After making your decision, you will not see the choices and results of other committee members. You can use your prior information to refine your decisions.
           </p>
         )}
         <Button
@@ -49,4 +47,3 @@ export function GameIntroduction() {
     </div>
   );
 }
-

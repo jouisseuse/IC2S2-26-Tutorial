@@ -37,13 +37,10 @@ export default defineConfig({
   build: {
     minify: false,
     target: "esnext",
-    sourcemap: true,
+    sourcemap: false,
     rollupOptions: {
       preserveEntrySignatures: "strict",
       plugins: [builtinsPlugin],
-      output: {
-        sourcemap: true,
-      },
     },
   },
   clearScreen: false,

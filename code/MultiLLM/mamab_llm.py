@@ -25,7 +25,7 @@ from typing import Dict, List
 import numpy as np
 from openai import OpenAI
 
-MODEL_NAME  = "gpt-4o"
+MODEL_NAME = "gpt-4o"
 TEMPERATURE = 0.0
 
 # Option A, recommended:
@@ -276,9 +276,6 @@ class BanditEnvironment:
         _append_log(log_file, round_log)
 
     def run_simulation(self, log_file: str, state_filename: str):
-        with open(log_file, "a") as f:
-            f.write('{"results": [')
-
         for round_num in range(self.current_round, self.rounds):
             round_log = {"round": round_num + 1, "choices": [], "rewards": [], "responses": []}
 
@@ -300,15 +297,12 @@ class BanditEnvironment:
 
             if self.communication:
                 shared_alpha = np.mean([a.alpha for a in self.agents], axis=0)
-                shared_beta  = np.mean([a.beta  for a in self.agents], axis=0)
+                shared_beta = np.mean([a.beta for a in self.agents], axis=0)
                 for agent in self.agents:
                     agent.share_information(shared_alpha, shared_beta)
 
             _append_log(log_file, round_log)
             _save_state(state_filename, self.agents, self.global_reward_history, round_num + 1)
-
-        with open(log_file, "a") as f:
-            f.write("]}")
 
     def _update_global_history(self, arm: int, reward: int):
         self.global_reward_history[arm][str(reward)] = (
@@ -350,12 +344,13 @@ def setup_experiment(num_agents: int, num_arms: int, ground_truth: str,
                      rounds: int, communication: bool,
                      experiment_repeats: int = 10, model: str = MODEL_NAME):
     timestamp   = datetime.now().strftime("%Y%m%d_%H%M%S")
-    log_folder  = f"experiment_logs_{timestamp}"
+    log_folder = f"experiment_logs_{timestamp}"
     state_folder = "state"
     os.makedirs(log_folder, exist_ok=True)
+    os.makedirs(state_folder, exist_ok=True)
 
     for exp_num in range(1, experiment_repeats + 1):
-        log_file   = os.path.join(log_folder,  f"experiment_{exp_num}_log.json")
+        log_file = os.path.join(log_folder, f"experiment_{exp_num}_log.jsonl")
         state_file = os.path.join(state_folder, f"experiment_{exp_num}_state.json")
         env = BanditEnvironment(
             num_arms=num_arms, num_agents=num_agents, ground_truth=ground_truth,
@@ -363,7 +358,7 @@ def setup_experiment(num_agents: int, num_arms: int, ground_truth: str,
             state_filename=state_file, log_file=log_file,
         )
         env.run_simulation(log_file, state_file)
-        print(f"Experiment {exp_num} completed → {log_file}")
+        print(f"Experiment {exp_num} completed -> {log_file}")
 
 
 if __name__ == "__main__":

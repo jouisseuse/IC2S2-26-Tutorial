@@ -1,11 +1,9 @@
 import {
   usePlayer,
-  usePlayers,
   useStage,
-  useGame,
 } from "@empirica/core/player/classic/react";
 import { Loading } from "@empirica/core/player/react";
-import React, { useEffect } from "react";
+import React from "react";
 import { Choice } from "./stages/Choice";
 import { Result } from "./stages/Result";
 import { GameIntroduction } from "./stages/GameIntroduction";
@@ -13,9 +11,7 @@ import { GroupAllocation } from "./stages/GroupAllocation.jsx";
 
 export function Stage() {
   const player = usePlayer();
-  const players = usePlayers();
   const stage = useStage();
-  const game = useGame();
 
   if (player.stage.get("submit")) {
     return (
@@ -25,7 +21,6 @@ export function Stage() {
     );
   }
 
-  // 动态加载阶段内容
   switch (stage.get("name")) {
     case "introduction":
       return <GameIntroduction />;
@@ -39,4 +34,3 @@ export function Stage() {
       return <Loading />;
   }
 }
-

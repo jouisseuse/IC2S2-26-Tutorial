@@ -1,7 +1,6 @@
-// path: src/components/Loading.jsx
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
-/* ---------- helpers (why: 组件自足、零依赖) ---------- */
+/* ---------- helpers ---------- */
 const clamp = (n, lo, hi) => Math.min(hi, Math.max(lo, n));
 const fmtTime = (ms) => {
   const s = Math.max(0, Math.ceil(ms / 1000));
@@ -38,13 +37,13 @@ const TRIVIA = [
       "Looping animation",
     ],
     answer: 1,
-    explain: "可见进度 + 交互小任务效果最好。",
+    explain: "Visible progress plus small interactive tasks usually works best.",
   },
   {
     q: "Privacy-friendly YouTube embed domain?",
     choices: ["youtube.com", "youtu.be", "youtube-nocookie.com"],
     answer: 2,
-    explain: "使用 youtube-nocookie 可减少第三方 cookie。",
+    explain: "youtube-nocookie.com reduces third-party cookies.",
   },
 ];
 
@@ -88,7 +87,7 @@ function VideoPane({ youtubeId }) {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerPolicy="no-referrer"
         allowFullScreen
-        // why: sandbox 限权
+        // Restrict iframe permissions.
         sandbox="allow-same-origin allow-scripts allow-presentation allow-popups"
       />
     </div>
@@ -231,7 +230,7 @@ export function SelfLoading({
   const [now, setNow] = useState(performance.now());
   const [manualExit, setManualExit] = useState(false);
 
-  // assemble activities; always include spinner
+  // Build activity tabs and always include the spinner.
   const activities = useMemo(() => {
     const base = ["spinner"];
     if (allowYouTube && youtubeId) base.push("video");
@@ -239,7 +238,7 @@ export function SelfLoading({
     return base;
   }, [allowYouTube, youtubeId, games]);
 
-  // restore last tab
+  // Restore the last selected tab when possible.
   const [mode, setMode] = useState(() => {
     try {
       const saved = localStorage.getItem("loading:last");
@@ -256,7 +255,7 @@ export function SelfLoading({
     try { localStorage.setItem("loading:last", mode); } catch {}
   }, [mode]);
 
-  // ticker
+  // Refresh the countdown.
   useEffect(() => {
     const id = setInterval(() => setNow(performance.now()), 200);
     return () => clearInterval(id);
@@ -266,7 +265,7 @@ export function SelfLoading({
   const rem = clamp(estimatedMs - elapsed, 0, estimatedMs);
   const pct = estimatedMs ? clamp(1 - rem / estimatedMs, 0, 1) : 0;
 
-  // auto exit at 0
+  // Auto-exit when the countdown reaches zero.
   useEffect(() => {
     if (rem <= 0 && !manualExit) {
       setManualExit(true);

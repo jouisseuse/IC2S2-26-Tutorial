@@ -80,7 +80,7 @@ export function ExitSurvey({ next }) {
       if (formData.experience === "Yes" && !formData.experienceDetails) newErrors.experienceDetails = "Please provide details about your experience.";
       if (!formData.motivation) newErrors.motivation = "Motivation is required.";
       if (!formData.engagement) newErrors.engagement = "Please rate the engagement of the game.";
-      if (!formData.clearity) newErrors.clearity = "Please rate the clearity of the instrcutions.";
+      if (!formData.clearity) newErrors.clearity = "Please rate the clarity of the instructions.";
       if (!formData.interferenceOption) newErrors.interferenceOption = "Please indicate if you encountered any technical issues.";
       if (formData.interferenceOption === "Yes" && !formData.interference) newErrors.interference = "Please describe the technical issues or distractions.";
       if (!formData.keyFactors) newErrors.keyFactors = "Please describe the key factors that influenced your decisions.";
@@ -147,7 +147,7 @@ export function ExitSurvey({ next }) {
                   <input
                     type="text"
                     className={inputClassName}
-                    placeholder="Please specify"
+                   placeholder="Please specify"
                     value={formData.genderOther}
                     onChange={(e) => handleInputChange("genderOther", e.target.value)}
                   />
@@ -175,7 +175,7 @@ export function ExitSurvey({ next }) {
                   <input
                     type="text"
                     className={inputClassName}
-                    placeholder="Please specify"
+                   placeholder="Please specify"
                     value={formData.raceOther}
                     onChange={(e) => handleInputChange("raceOther", e.target.value)}
                   />
@@ -211,7 +211,7 @@ export function ExitSurvey({ next }) {
                   <input
                     type="text"
                     className={inputClassName}
-                    placeholder="Please specify"
+                   placeholder="Please specify"
                     value={formData.educationOther}
                     onChange={(e) => handleInputChange("educationOther", e.target.value)}
                   />
@@ -308,7 +308,7 @@ export function ExitSurvey({ next }) {
                   name="experienceDetails"
                   rows="4"
                   className={`${inputClassName} mt-4`}
-                  placeholder="Please share details such as when, where, who organized it (e.g., university, company, etc.), and a brief description of the experiment, if possible."
+                 placeholder="Please share details such as when, where, who organized it (e.g., university, company, etc.), and a brief description of the experiment, if possible."
                   value={formData.experienceDetails || ""}
                   onChange={(e) => handleInputChange("experienceDetails", e.target.value)}
                 />
@@ -443,7 +443,7 @@ export function ExitSurvey({ next }) {
                 name="motivation"
                 rows="4"
                 className={inputClassName}
-                 placeholder="Please share your motivation for participating (e.g., monetary incentive, interest in research, learning experience, curiosity)."
+                placeholder="Please share your motivation for participating (e.g., monetary incentive, interest in research, learning experience, curiosity)."
                 value={formData.motivation}
                 onChange={(e) => handleInputChange("motivation", e.target.value)}
               />
@@ -481,7 +481,7 @@ export function ExitSurvey({ next }) {
                   name="interference"
                   rows="4"
                   className={`${inputClassName} mt-4`}
-                  placeholder="Please describe the issue (e.g., which step or stage it occurred, what happened, any error messages, distractions, or confusing instructions)."
+                 placeholder="Please describe the issue (e.g., which step or stage it occurred, what happened, any error messages, distractions, or confusing instructions)."
                   value={formData.interference || ""}
                   onChange={(e) =>
                     handleInputChange("interference", e.target.value)
