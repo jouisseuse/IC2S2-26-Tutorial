@@ -6,7 +6,6 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DEFAULT_EXPERIMENT_DIR="$SCRIPT_DIR/../my-experiment"
 EXPERIMENT_DIR="${1:-$DEFAULT_EXPERIMENT_DIR}"
 START_EMPIRICA="${START_EMPIRICA:-0}"
-ALLOW_UNSUPPORTED_NODE="${ALLOW_UNSUPPORTED_NODE:-0}"
 RUN_STARTUP_TEST="${RUN_STARTUP_TEST:-1}"
 STARTUP_TEST_SECONDS="${STARTUP_TEST_SECONDS:-15}"
 EMPIRICA_BIN=""
@@ -86,29 +85,31 @@ absolute_experiment_dir() {
 check_node() {
   step "Check Node.js and npm"
 
-  command_exists node || die "Node.js is not installed. Install Node.js 20.12 or newer, then run this script again."
+  command_exists node || die "Node.js is not installed. Install Node.js, then run this script again."
   command_exists npm || die "npm is not installed. Install npm, then run this script again."
 
   local node_version
+  local node_major
   node_version="$(node -p "process.versions.node")"
+  node_major="${node_version%%.*}"
   info "Node.js version: $node_version"
 
-  if node -e 'const [major, minor, patch] = process.versions.node.split(".").map(Number); process.exit((major > 20 || (major === 20 && (minor > 12 || (minor === 12 && patch >= 0)))) ? 0 : 1);'; then
-    ok "Node.js version is supported."
-  elif [[ "$ALLOW_UNSUPPORTED_NODE" == "1" ]]; then
-    warn "Node.js is below 20.12. Continuing because ALLOW_UNSUPPORTED_NODE=1."
+  if [[ "$node_major" =~ ^[0-9]+$ ]] && (( node_major >= 18 )); then
+    ok "Node.js version looks suitable."
   else
-    die "Node.js $node_version is too old for @empirica/core. Install Node.js 20.12 or newer."
+    warn "Node.js 18 or newer is recommended. Continuing anyway; npm or Empirica will report a clearer error if this version is incompatible."
   fi
 
   local npm_version
+  local npm_major
   npm_version="$(npm --version)"
+  npm_major="${npm_version%%.*}"
   info "npm version: $npm_version"
 
-  if node -e "const major = Number('$npm_version'.split('.')[0]); process.exit(major >= 10 ? 0 : 1);"; then
-    ok "npm version is recommended."
+  if [[ "$npm_major" =~ ^[0-9]+$ ]] && (( npm_major >= 8 )); then
+    ok "npm version looks suitable."
   else
-    warn "npm 10 or newer is recommended. The setup may still work, but update npm if you see install errors."
+    warn "npm 8 or newer is recommended. Continuing anyway; update npm if dependency installation fails."
   fi
 }
 

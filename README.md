@@ -18,8 +18,8 @@ TogetherHire is an Empirica experiment where participants act as hiring managers
 Install these before running the tutorial setup script:
 
 - Git: [official Git downloads](https://git-scm.com/downloads)
-- Node.js 20.12 or newer: [official Node.js downloads](https://nodejs.org/en/download)
-- npm 10 or newer recommended: [official npm install guide](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+- Node.js 18 or newer recommended: [official Node.js downloads](https://nodejs.org/en/download)
+- npm 8 or newer recommended: [official npm install guide](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 You can check your versions with:
 
@@ -136,7 +136,7 @@ git --version
 
 ### Node.js is too old
 
-Install Node.js 20.12 or newer, then confirm:
+Install Node.js 18 or newer recommended, then confirm:
 
 ```bash
 node --version
@@ -144,7 +144,7 @@ node --version
 
 ### npm is missing or too old
 
-Install or update npm, then confirm:
+Install or update npm if needed, then confirm:
 
 ```bash
 npm --version
