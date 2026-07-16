@@ -133,6 +133,10 @@ python mamab_llm.py
 
 For a quick local tutorial edit, you can also paste a temporary key into `DIRECT_API_KEY` near the top of `mamab_llm.py`. Do not commit real API keys.
 
+## Related Empirica Resource
+
+- [Empirica Copilot](https://github.com/malsobay/empirica-copilot): a community tool that may help when building or adapting Empirica experiments.
+
 ## Troubleshooting
 
 ### `curl ... | sh` fails on Windows
