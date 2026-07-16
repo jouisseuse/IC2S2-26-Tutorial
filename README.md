@@ -98,6 +98,23 @@ RUN_STARTUP_TEST=0 bash setup_togetherhire.sh
 
 The script stops if the target project folder already exists. This avoids overwriting your existing work.
 
+## Load Testing
+
+A small browser-based load-test tool is available in `load_test/`. It uses Playwright to simulate participant browsers joining the TogetherHire game and making choices.
+
+After the game has been set up in `../my-experiment`, run:
+
+```bash
+cd load_test
+npm install
+npx playwright install chromium
+# Linux/WSL only, if Chromium fails to launch:
+npx playwright install-deps chromium
+npm run capacity
+```
+
+The default capacity test checks up to 200 simulated participants. It stops at the first failing level and prints `estimatedCap`. Use `--max-users` or `--levels` to change the default.
+
 ## MultiLLM Setup
 
 The setup script only prepares and tests the Empirica experiment.

@@ -8,3 +8,7 @@ __pycache__/
 .empirica/release
 *.timestamp-*.mjs
 .DS_Store
+
+# Load-test artifacts
+load_test/results/
+load_test/.cache/
